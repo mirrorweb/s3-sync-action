@@ -22,6 +22,11 @@ if [ -z "$AWS_REGION" ]; then
   exit 1
 fi
 
+if [ -z "$AWS_GHA_ROLE" ]; then
+  echo "AWS_GHA_ROLE is not set. Quitting."
+  exit 1
+fi
+
 if [ -z "$SOURCE_DIR" ] || [ -z "$SOURCE_ARRAY" ]; then
   echo "No Sources set please set SOURCE_DIR or SOURCE_ARRAY. Quitting"
   exit 1
@@ -42,7 +47,7 @@ touch ~/.aws/config
 echo "[profile internal]" >> ~/.aws/config
 echo "region = eu-west-1" >> ~/.aws/config
 echo "output = json" >> ~/.aws/config
-echo "role_arn = arn:aws:iam::055800464970:role/GHAAccessRole" >> ~/.aws/config
+echo "role_arn = ${AWS_GHA_ROLE}" >> ~/.aws/config
 echo "source_profile = s3-sync-action" >> ~/.aws/config
 
 if [ -z "$SOURCE_DIR" ]; then
