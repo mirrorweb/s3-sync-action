@@ -27,7 +27,7 @@ if [ -z "$AWS_GHA_ROLE" ]; then
   exit 1
 fi
 
-if [ -z "$SOURCE_DIR" ] || [ -z "$SOURCE_ARRAY" ]; then
+if [ -z "$SOURCE_DIR" ] && [ -z "$SOURCE_ARRAY" ]; then
   echo "No Sources set please set SOURCE_DIR or SOURCE_ARRAY. Quitting"
   exit 1
 fi
