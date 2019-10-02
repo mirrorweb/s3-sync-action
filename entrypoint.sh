@@ -42,7 +42,7 @@ ${AWS_REGION}
 text
 EOF
 
-mkdir ~/.aws
+mkdir -p ~/.aws
 touch ~/.aws/config
 echo "[profile internal]" >> ~/.aws/config
 echo "region = eu-west-1" >> ~/.aws/config
