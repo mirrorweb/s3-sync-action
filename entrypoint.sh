@@ -37,13 +37,21 @@ ${AWS_REGION}
 text
 EOF
 
+mkdir ~/.aws
+touch ~/.aws/config
+echo "[profile internal]" >> ~/.aws/config
+echo "region = eu-west-1" >> ~/.aws/config
+echo "output = json" >> ~/.aws/config
+echo "role_arn = arn:aws:iam::055800464970:role/GHAAccessRole" >> ~/.aws/config
+echo "source_profile = s3-sync-action" >> ~/.aws/config
+
 if [ -z "$SOURCE_DIR" ]; then
   echo "No Sources set please set SOURCE_DIR or SOURCE_ARRAY. Skipping"
 else
   # Use our dedicated profile and suppress verbose messages.
   # All other flags are optional via `args:` directive.
   sh -c "aws s3 sync ${SOURCE_DIR} s3://${AWS_S3_BUCKET} \
-                --profile s3-sync-action \
+                --profile internal \
                 --no-progress $*"
 fi
 
@@ -55,7 +63,7 @@ else
     # Use our dedicated profile and suppress verbose messages.
     # All other flags are optional via `args:` directive.
     sh -c "aws s3 cp ${element} s3://${AWS_S3_BUCKET} \
-                  --profile s3-sync-action \
+                  --profile internal \
                   --no-progress $*"
   done
 fi
