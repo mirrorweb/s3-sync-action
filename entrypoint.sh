@@ -64,7 +64,7 @@ fi
 if [ -z "$SOURCE_ARRAY" ]; then
   echo "No Sources set please set SOURCE_DIR or SOURCE_ARRAY. Quitting"
 else
-  arr=("$SOURCE_ARRAY")
+  arr=($SOURCE_ARRAY)
   for element in "${arr[@]}";do
     # Use our dedicated profile and suppress verbose messages.
     # All other flags are optional via `args:` directive.
