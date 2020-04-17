@@ -32,7 +32,7 @@ if [ -z "$SOURCE_DIR" ] && [ -z "$SOURCE_ARRAY" ]; then
   exit 1
 fi
 
-rm -rf ~/.aws
+rm -rf ~/.aws/config
 # Create a dedicated profile for this action to avoid
 # conflicts with other actions.
 # https://github.com/jakejarvis/s3-sync-action/issues/1
