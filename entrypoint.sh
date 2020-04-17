@@ -42,13 +42,15 @@ ${AWS_REGION}
 text
 EOF
 
-mkdir -p ~/.aws
-touch ~/.aws/config
-echo "[profile internal]" >> ~/.aws/config
-echo "region = eu-west-1" >> ~/.aws/config
-echo "output = json" >> ~/.aws/config
-echo "role_arn = ${AWS_GHA_ROLE}" >> ~/.aws/config
-echo "source_profile = s3-sync-action" >> ~/.aws/config
+if [ ! -f ~/.aws/config ];then
+  mkdir -p ~/.aws
+  touch ~/.aws/config
+  echo "[profile internal]" >> ~/.aws/config
+  echo "region = eu-west-1" >> ~/.aws/config
+  echo "output = json" >> ~/.aws/config
+  echo "role_arn = ${AWS_GHA_ROLE}" >> ~/.aws/config
+  echo "source_profile = s3-sync-action" >> ~/.aws/config
+fi
 
 if [ -z "$SOURCE_DIR" ]; then
   echo "No Sources set please set SOURCE_DIR or SOURCE_ARRAY. Skipping"
